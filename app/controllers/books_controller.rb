@@ -12,8 +12,9 @@ class BooksController < ApplicationController
      render :new
    end
   end
-  
+
   def index
+   @books = Book.all
   end
 
   def show
@@ -26,11 +27,15 @@ class BooksController < ApplicationController
     redirect_to '/books'
   end
 
-  
   private
 
   def book_params
     params.require(:book).permit(:title, :image, :body)
   end
-
-end
+  
+　def correct_user
+　  @book = Book.find(params[:id])
+    @user = @book.user
+    redeirect_to(books_path) unless @user == current_user
+  end
+  end

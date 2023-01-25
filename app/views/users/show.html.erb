@@ -5,8 +5,8 @@
   <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
   <% end %>
 </div>
-
 <% @books.each do |book| %>
+
 <div>
   <%= link_to book_path(book.id) do %>
     <%= image_tag book.get_image %>
