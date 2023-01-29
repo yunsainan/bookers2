@@ -1,12 +1,54 @@
-<% @books.each do |book| %>
-<div>
-  <%= link_to book_path(book.id) do %>
-   <%= image_tag book.get_image %>
-  <% end %>
+<div class="container px-5 px-sm-0">
+  <div id="error_explanation">
+    <% if @new_book.errors.any? %>
+      <h3><%= @new_book.errors.count %> errors prohibited this obj from being saved:</h3>
+      <ul>
+        <% @new_book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+ 
+  <div class="row">
+    <div class="col-md-3">
+   
+     <%# user info   new book %>
+     <%= render 'users/list', user: @user, book: @new_book %>
+    </div>
+   <div class="col-md-8 offset-md-1">
+   
+     <%# books index %>
+    <h2>Books</h2>
+    <table class="table table-hover table-inverse">
+     <thead>
+      <th></th>
+       <th>Title</th>
+       <th>Opinion</th>
+       <th colspan="3"></th>
+     </thead>
+     <% @books.each do |books|%>
+     <tbody>
+         <tr>
+             <td>
+              <%= link_to user_path(books.user.id) do %>
+               <%= image_tag books.user.get_profile_image(80, 80) %> 
+              <% end %>
+             </td>
+             <td>
+              <%= link_to user_path(books.user.id) do %>
+               <%= books.title %>
+             </td>
+             <td>
+              <%= books.body %>
+             </td>
+         </tr>
+     </tbody>
+     <% end %>
+    </table>
   
-  <p>投稿ユーザー画像：<%= image_tag book.user.get_profile_image(100,100) %></p>
-  <p>ショップ名：<%= book.title %></p>
-  <p>説明：<%= book.body %></p>
-  <p>ユーザーネーム：<%= book.user.name %></p>
+   </div>
+  </div>
 </div>
-<% end %>
+  
+
