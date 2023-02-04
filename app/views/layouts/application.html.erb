@@ -1,13 +1,13 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Bookers2</title>
     
     
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   
     <script src="https://kit.fontawesome.com/7d4686f8ad.js" crossorigin="anonymous"></script>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -33,7 +33,7 @@
         <li>
          
          <%#ログイン時の自分の投稿一覧%>
-         <% link_to user_path(current_user.id), class: 'nav-link text-light' do %>
+         <%= link_to user_path(current_user.id), class: 'nav-link text-light' do %>
           <i class="fas fa-home"></i>
           Home
          <% end %>
@@ -57,14 +57,20 @@
           <% end %>
         </li>
         <li>
-         <%= link_to about_path, class: 'navlink text-light' do %>
+         <%= link_to about_path, class: 'nav-link text-light' do %>
           <i class="fas fa-link"></i>
            About
           <% end %>
         </li>
         <li>
-         <%= link_to  new_user_registration_path, class: 'nav-link tex-light' do %>
-          <i class="fas fa-sihn-in-alt"></i>
+         <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
+          <i class="fas fa-user-plus"></i>
+          Sign up
+          <% end %>
+        </li>
+        <li>
+         <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
+          <i class="fas fa-sign-in-alt"></i>
            Log in
           <% end %>
         </li>
@@ -77,6 +83,7 @@
    <%# メイン %>
    <main>
     <p id="notice"><%= flash[:notice] %></p>
+    <%= yield %>
    </main>
    <%# フッター %>
    <footer>

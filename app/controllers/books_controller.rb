@@ -1,25 +1,27 @@
 class BooksController < ApplicationController
-  before_action :is_matching_login_user, only: [:edit, :update]
-  before_action :user_info_new_book, only: [:index, :snow]
+  #ログインユーザー本人のみ編集・更新可能
+  #ログインユーザー本人のみindex show閲覧可能
+  before_action :is_matching_login_user, only: [:edit, :update] 
+  before_action :user_info_new_book, only: [:index, :show]
 
   def create
-   @new_book = Book.new(book_params)
-   @new_book.user_id = current_user.id
+    @new_book = Book.new(book_params)
+    @new_book.user_id = current_user.id
    if @new_book.save
     flash[:notice] = "You have created book successfully."
-   #books/showへ
-   redirect_to books_path(@new_book.id)
+    #books/showへ
+    redirect_to books_path(@new_book.id)
    else
-   #books/indexへ
-   @user = current_user
-   @books = Book.all
-   render :index
+    #books/indexへ
+    @user = current_user
+    @books = Book.all
+    render :index
    end
   end
 
   def index
-   user_info_new_book
-   @books = Book.all
+    user_info_new_book
+    @books = Book.all
   end
 
   def show
@@ -54,7 +56,7 @@ class BooksController < ApplicationController
   private
   
   def book_params
-    params.require(:book).permit(:title,:body)
+    params.require(:book).permit(:title, :body)
   end
  
   def is_matching_login_user

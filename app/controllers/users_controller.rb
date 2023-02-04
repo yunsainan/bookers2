@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  #ログインユーザー本人のみ編集・更新可能
+  #ログインユーザー本人のみindex show閲覧可能
   before_action :is_matching_login_user, only: [:edit, :update]
   before_action :user_info_new_book, only: [:index, :show]
   
@@ -11,7 +13,7 @@ class UsersController < ApplicationController
   
   def index
     user_info_new_book
-    @user = User.find(params[:id])
+    @users = User.all
   end
   
   def show
@@ -27,7 +29,7 @@ class UsersController < ApplicationController
      flash[:notice] = "You have update user successfuly."
     redirect_to user_path(@user.id)
    else
-    render 'edit'
+    render :edit
    end
   end
 

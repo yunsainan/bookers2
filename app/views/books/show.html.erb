@@ -25,7 +25,7 @@
          <tr>
            <td>
              <%= link_to user_path(@book.user.id) do %>
-              <%= image_tag.user.get_profile_image(80, 80) %><br>
+              <%= image_tag @book.user.get_profile_image(80, 80) %><br>
               <%= @book.user.name %>
              <% end %>
            </td>
@@ -39,7 +39,7 @@
            </td>
            <% if @book.user.id == current_user.id %>
             <td>
-              <% link_to 'Edit', edit_book_path(@book.id), class: 'btn btn-sm btn-success' %>
+              <%= link_to 'Edit', edit_book_path(@book.id), class: 'btn btn-sm btn-success' %>
             </td>
             <td>
               <%= link_to 'Destroy', book_path(@book.id), methhod: :delete, "data-confilm" => "本当に消しますか？", class: 'btn btn-sm btn-danger' %>

@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
   
   
   protected
-  #config   認証キーemail=>nameにした
-  #sign_up時   設定ユーザー名email=>name 
-  #ストロングパラメーター   認証キーでないname=>認証キーにしたいemail
+  #1.config   認証キーemail=>nameにした
+  #2.sign_up時   設定ユーザー名email=>name 
+  #3.ストロングパラメーター   認証キーでないname=>認証キーにしたいemail
   def configure_permitted_parameters
    devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
   end
@@ -21,5 +21,4 @@ class ApplicationController < ActionController::Base
    @user = current_user
    @new_book = Book.new
   end
-  
 end
