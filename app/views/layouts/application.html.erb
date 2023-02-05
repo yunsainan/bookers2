@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookers2</title>
-    
+    <title>Bookers!</title>
     
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-   
-    <script src="https://kit.fontawesome.com/7d4686f8ad.js" crossorigin="anonymous"></script>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-   
    <%# ヘッター部分 %>
    <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-     <div class="container"></div>
+     <div class="container">
       <%= link_to root_path, class: 'navbar-brand' do %>
         <span>Bookers</span>
       <% end %>
@@ -29,9 +24,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
        <ul class="navbar-nav ml-auto">
-        <% if user_signed_in? %>
+      <% if user_signed_in? %>
         <li>
-         
          <%#ログイン時の自分の投稿一覧%>
          <%= link_to user_path(current_user.id), class: 'nav-link text-light' do %>
           <i class="fas fa-home"></i>
@@ -39,17 +33,24 @@
          <% end %>
         </li>
         <li>
+         <%= link_to users_path, class: 'nav-link text-light' do %>
+           <i class="fas fa-users"></i>
+           Users
+         <% end %>
+        </li>
+        <li>
          <%= link_to books_path, class: 'nav-link text-light' do %>
            <i class="fas fa-book-open"></i>
-          Booke
+          Bookes
          <% end %>
         </li>
         <li>
          <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
-           <i class="fas fa-sign-out-all"></i>
+           <i class="fas fa-sign-out-alt"></i>
           Log out
          <% end %>
         </li>
+      <% else %>
         <li>
          <%= link_to root_path, class: 'nav-link text-light' do %>
           <i class="fas fa-home"></i>
@@ -74,7 +75,7 @@
            Log in
           <% end %>
         </li>
-        <% end %>
+      <% end %>
        </ul>
       </div>
      </div>
